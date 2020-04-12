@@ -5,45 +5,79 @@ using UnityEngine;
 public class Ruler : MonoBehaviour
 {
     private const int MAX_SIZE_RULER = 16;
+
+    public static Ruler Instance { set; get; }
     public Vector2 pointStart;
 
     public GameObject valueBoxPrefab;
 
     public List<GameObject> elementsOfRuler = new List<GameObject>();
+    public List<ValueBox> hideBoxList = new List<ValueBox>();
 
     private int hideIndex = 5;
-    
-    private void Start()
-    {
-        CreateRuler();
-    }
+    private int xValue;
 
-    private void CreateRuler()
+    private void Update()
     {
-        if(elementsOfRuler != null)
+        if (GameManager.Instance.gameOverStatus) return;
+        if(hideBoxList.Count != 0)
         {
-            foreach(GameObject gameObject in elementsOfRuler)
+            if (hideBoxList[0].InputNumber())
             {
-                DestroyImmediate(gameObject);
+                hideBoxList.RemoveAt(0);
             }
         }
+        else
+        {
+            GameManager.Instance.NextLevel(1);
+        }
+    }
+    private void Start()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+      
+        CreateRuler();
+        RefreshRuler();
+    }
 
-        int xValue = 101;
-        for(int i = 0; i < 16; i++)
+    public void CreateRuler()
+    {
+        for (int i = 0; i < 16; i++)
         {
             GameObject valueBox = Instantiate(valueBoxPrefab) as GameObject;
-            valueBox.transform.parent = this.transform;
+            valueBox.transform.SetParent(this.transform);
             valueBox.transform.localScale = this.transform.localScale;
             valueBox.GetComponent<RectTransform>().anchoredPosition = new Vector2(pointStart.x + 90 * i, pointStart.y);
-            valueBox.GetComponent<ValueBox>().SetNumber(xValue);
-            xValue++;
             elementsOfRuler.Add(valueBox);
         }
+    }
 
-        for(int i = hideIndex; i < hideIndex + 4; i++)
+    public void RefreshRuler()
+    {
+        xValue = UnityEngine.Random.Range(0, 989);
+        hideIndex = UnityEngine.Random.Range(0, 13);
+        foreach(GameObject gameObject in elementsOfRuler)
+        {
+            gameObject.GetComponent<ValueBox>().Refresh();
+        }
+
+        for (int i = 0; i < 16; i++)
+        {
+            elementsOfRuler[i].GetComponent<ValueBox>().SetNumber(xValue);
+            xValue++;
+        }
+
+        for (int i = hideIndex; i < hideIndex + 4; i++)
         {
             elementsOfRuler[i].GetComponent<ValueBox>().SetInputStatus();
+            hideBoxList.Add(elementsOfRuler[i].GetComponent<ValueBox>());
         }
-        //elementsOfRuler.Clear();
     }
 }
