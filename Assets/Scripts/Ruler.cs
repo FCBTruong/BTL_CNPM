@@ -17,6 +17,10 @@ public class Ruler : MonoBehaviour
     private int hideIndex = 5;
     private int xValue;
 
+    private Animator anim;
+
+    public static int score;
+
     private void Update()
     {
         if (GameManager.Instance.gameOverStatus) return;
@@ -29,11 +33,13 @@ public class Ruler : MonoBehaviour
         }
         else
         {
-            GameManager.Instance.NextLevel(1);
+            if (score == 0) score = 1;
+            GameManager.Instance.NextLevel(score);
         }
     }
     private void Start()
     {
+        score = 1;
         if(Instance == null)
         {
             Instance = this;
@@ -42,6 +48,8 @@ public class Ruler : MonoBehaviour
         {
             Destroy(this);
         }
+
+        anim = this.GetComponent<Animator>();
       
         CreateRuler();
         RefreshRuler();
@@ -61,6 +69,8 @@ public class Ruler : MonoBehaviour
 
     public void RefreshRuler()
     {
+        score = 1;
+        anim.SetTrigger("ShowLoad");
         xValue = UnityEngine.Random.Range(0, 989);
         hideIndex = UnityEngine.Random.Range(0, 13);
         foreach(GameObject gameObject in elementsOfRuler)
@@ -77,7 +87,8 @@ public class Ruler : MonoBehaviour
         for (int i = hideIndex; i < hideIndex + 4; i++)
         {
             elementsOfRuler[i].GetComponent<ValueBox>().SetInputStatus();
-            hideBoxList.Add(elementsOfRuler[i].GetComponent<ValueBox>());
+            //hideBoxList.Add(elementsOfRuler[i].GetComponent<ValueBox>());
+            hideBoxList.Insert(0,elementsOfRuler[i].GetComponent<ValueBox>());
         }
     }
 }

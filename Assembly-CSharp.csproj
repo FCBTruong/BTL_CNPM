@@ -64,7 +64,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Ball.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\HomeManager.cs" />
+    <Compile Include="Assets\Scripts\HomeGame.cs" />
     <Compile Include="Assets\Scripts\Language.cs" />
     <Compile Include="Assets\Scripts\Ruler.cs" />
     <Compile Include="Assets\Scripts\ValueBox.cs" />

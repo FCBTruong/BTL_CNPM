@@ -105,6 +105,7 @@ private void SpecializeNumber()
         if (value >= 100) inputNumber3Char.SetActive(true);
         else if (value >= 10) inputNumber2Char.SetActive(true);
         else inputNumber1Char.SetActive(true);
+        valueText.enabled = false;
     }
 
     public bool InputNumber()
@@ -164,6 +165,7 @@ private void SpecializeNumber()
                 if(value >= 100) inputNumber3Char.SetActive(false);
                 else if(value >= 10) inputNumber2Char.SetActive(false);
                 else inputNumber1Char.SetActive(false);
+                valueText.enabled = true;
                 return true;
             }
             Debug.Log(valueString);
@@ -177,6 +179,12 @@ private void SpecializeNumber()
         else
         {
             listChar[checkCharIndex].color = Color.red;
+            Ruler.score--;
+
+            if(Ruler.score == -1)
+            {
+                GameManager.Instance.MoveBallLeft();
+            }
         }
         return false;
     }
