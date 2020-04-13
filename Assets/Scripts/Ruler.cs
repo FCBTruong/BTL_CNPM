@@ -87,8 +87,8 @@ public class Ruler : MonoBehaviour
         for (int i = hideIndex; i < hideIndex + 4; i++)
         {
             elementsOfRuler[i].GetComponent<ValueBox>().SetInputStatus();
-            //hideBoxList.Add(elementsOfRuler[i].GetComponent<ValueBox>());
-            hideBoxList.Insert(0,elementsOfRuler[i].GetComponent<ValueBox>());
+            if(HomeGame.gameKind == 0) hideBoxList.Add(elementsOfRuler[i].GetComponent<ValueBox>());
+            else hideBoxList.Insert(0,elementsOfRuler[i].GetComponent<ValueBox>());
         }
     }
 }
