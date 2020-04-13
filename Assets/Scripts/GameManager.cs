@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class GameManager : MonoBehaviour
     public bool gameOverStatus;
     public static float distanceBall;
     public Transform endBall;
+
+    // Change Language
+    public Text backText;
+    public Text titleText;
+    public Text congratulation;
 
     private void Start()
     {
@@ -47,10 +53,12 @@ public class GameManager : MonoBehaviour
     public void ShowWinGame()
     {
         gameOver.SetActive(true);
+        DestroyImmediate(HomeGame.Instance.gameObject);
     }
 
     public void BackHome()
     {
+        DestroyImmediate(HomeGame.Instance.gameObject);
         SceneManager.LoadScene("Home");
     }
 
@@ -59,5 +67,36 @@ public class GameManager : MonoBehaviour
         if (numberBallMiss == 5) return;
         listBalls[numberBallMiss].MoveLeft();
         numberBallMiss++;
+    }
+
+    public void ChangLanguage()
+    {
+        int lang = 0;
+        lang = PlayerPrefs.GetInt("Language");
+
+        if (lang == 0)
+        {
+            ChangeLanguageToVietnamese();
+        }
+        else
+        {
+            ChangeLanguageToEnglish();
+        }
+    }
+
+    public void ChangeLanguageToEnglish()
+    {
+        backText.text = "Back";
+        titleText.text = "Fill in the blanks on the number line";
+        congratulation.text = "Well done! You completed the card";
+        PlayerPrefs.SetInt("Language", 0);
+    }
+
+    public void ChangeLanguageToVietnamese()
+    {
+        backText.text = "Trở lại";
+        titleText.text = "Điền vào các ô trống số phù hợp";
+        congratulation.text = "Làm tốt lắm! Bạn đã hoàn thành bài tập";
+        PlayerPrefs.SetInt("Language", 1);
     }
 }

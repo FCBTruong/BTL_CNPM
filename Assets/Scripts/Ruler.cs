@@ -28,7 +28,23 @@ public class Ruler : MonoBehaviour
         {
             if (hideBoxList[0].InputNumber())
             {
+                if(HomeGame.gameKind == 0)
+                {
+                    if(hideBoxList.Count > 1)
+                    {
+                        hideBoxList[0].ShowArrowRight();
+                    }
+                }
+                else
+                {
+                    if (hideBoxList.Count > 1)
+                    {
+                        hideBoxList[0].ShowArrowLeft();
+                    }
+                }
+
                 hideBoxList.RemoveAt(0);
+
             }
         }
         else

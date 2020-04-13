@@ -29,9 +29,10 @@ public class ValueBox : MonoBehaviour
     private int checkCharIndex = 0;
 
     private string valueString;
-
+    public Animator anim;
     private void Awake()
     {
+        //anim = this.GetComponent<Animator>();
         inputNumber3Char.SetActive(false);
         inputNumber2Char.SetActive(false);
         inputNumber1Char.SetActive(false);
@@ -57,7 +58,7 @@ public class ValueBox : MonoBehaviour
         checkCharIndex = 0;
 
     }
-private void SpecializeNumber()
+    private void SpecializeNumber()
     {
         valueText.fontStyle = FontStyle.Bold;
     }
@@ -216,5 +217,14 @@ private void SpecializeNumber()
             x += s[i];
         }
         return x;
+    }
+
+    public void ShowArrowRight()
+    {
+        anim.SetTrigger("ShowArrowRight");
+    }
+    public void ShowArrowLeft()
+    {
+        anim.SetTrigger("ShowArrowLeft");
     }
 }

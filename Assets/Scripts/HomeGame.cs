@@ -6,8 +6,10 @@ using UnityEngine.SceneManagement;
 public class HomeGame : MonoBehaviour
 {
     public static int gameKind; // 0 is forward, 1 is backward
+    public static HomeGame Instance;
     private void Start()
     {
+        Instance = this;
         gameKind = 0;
         DontDestroyOnLoad(this);
     }
