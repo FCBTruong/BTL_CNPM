@@ -28,7 +28,8 @@ public class Ball : MonoBehaviour
     }
     public void MoveLeft()
     {
-
+        positionDestination = new Vector2(positionInitial.x, positionInitial.y);
+        move = true;
     }
 
     public void MoveRight()

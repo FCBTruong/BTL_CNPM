@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -29,8 +30,11 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel(int score)
     {
-        numberBallMiss -= score;
-        if (score > 0) listBalls[numberBallMiss].MoveRight();
+        if (score > 0)
+        {
+            numberBallMiss -= score;
+            listBalls[numberBallMiss].MoveRight();
+        }
         if (numberBallMiss == 0)
         {
             gameOverStatus = true;
@@ -43,5 +47,17 @@ public class GameManager : MonoBehaviour
     public void ShowWinGame()
     {
         gameOver.SetActive(true);
+    }
+
+    public void BackHome()
+    {
+        SceneManager.LoadScene("Home");
+    }
+
+    public void MoveBallLeft()
+    {
+        if (numberBallMiss == 5) return;
+        listBalls[numberBallMiss].MoveLeft();
+        numberBallMiss++;
     }
 }
