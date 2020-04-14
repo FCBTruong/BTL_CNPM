@@ -30,6 +30,9 @@ public class ValueBox : MonoBehaviour
 
     private string valueString;
     public Animator anim;
+
+    private int boxKind;
+    private bool choosing;
     private void Awake()
     {
         //anim = this.GetComponent<Animator>();
@@ -39,6 +42,9 @@ public class ValueBox : MonoBehaviour
     }
     public void Refresh()
     {
+        inputNumber1Char.GetComponent<Image>().color = Color.white;
+        inputNumber2Char.GetComponent<Image>().color = Color.white;
+        inputNumber3Char.GetComponent<Image>().color = Color.white;
         inputNumber3Char.SetActive(false);
         inputNumber2Char.SetActive(false);
         inputNumber1Char.SetActive(false);
@@ -57,6 +63,7 @@ public class ValueBox : MonoBehaviour
         oneChar.text = "";
         checkCharIndex = 0;
 
+        anim.Rebind();
     }
     private void SpecializeNumber()
     {
@@ -103,14 +110,29 @@ public class ValueBox : MonoBehaviour
 
     public void SetInputStatus()
     {
-        if (value >= 100) inputNumber3Char.SetActive(true);
-        else if (value >= 10) inputNumber2Char.SetActive(true);
-        else inputNumber1Char.SetActive(true);
+        if (value >= 100)
+        {
+            inputNumber3Char.SetActive(true);
+            boxKind = 3;
+        }
+        else if (value >= 10)
+        {
+            inputNumber2Char.SetActive(true);
+            boxKind = 2;
+        }
+        else
+        {
+            inputNumber1Char.SetActive(true);
+            boxKind = 1;
+        }
         valueText.enabled = false;
     }
 
     public bool InputNumber()
     {
+
+        choosingStatus();
+
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             return CheckInputNumber(0);
@@ -154,6 +176,23 @@ public class ValueBox : MonoBehaviour
         return false;
     }
 
+    private void choosingStatus()
+    {
+        if (choosing == true) return;
+        choosing = true;
+        switch (boxKind)
+        {
+            case 1:
+                inputNumber1Char.GetComponent<Image>().color = Color.cyan;
+                break;
+            case 2:
+                inputNumber2Char.GetComponent<Image>().color = Color.cyan;
+                break;
+            case 3:
+                inputNumber3Char.GetComponent<Image>().color = Color.cyan;
+                break;
+        }
+    }
     public bool CheckInputNumber(int x)
     {
         Debug.Log(listChar.Count);

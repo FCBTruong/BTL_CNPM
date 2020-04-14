@@ -39,7 +39,7 @@ public class Ruler : MonoBehaviour
                 {
                     if (hideBoxList.Count > 1)
                     {
-                        hideBoxList[0].ShowArrowLeft();
+                        hideBoxList[1].ShowArrowLeft();
                     }
                 }
 
