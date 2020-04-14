@@ -64,6 +64,7 @@ public class ValueBox : MonoBehaviour
         checkCharIndex = 0;
 
         anim.Rebind();
+        choosing = false;
     }
     private void SpecializeNumber()
     {
