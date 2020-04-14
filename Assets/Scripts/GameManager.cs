@@ -53,12 +53,12 @@ public class GameManager : MonoBehaviour
     public void ShowWinGame()
     {
         gameOver.SetActive(true);
-        DestroyImmediate(HomeGame.Instance.gameObject);
+        if(HomeGame.Instance != null) DestroyImmediate(HomeGame.Instance.gameObject);
     }
 
     public void BackHome()
     {
-        DestroyImmediate(HomeGame.Instance.gameObject);
+        if (HomeGame.Instance != null)  DestroyImmediate(HomeGame.Instance.gameObject);
         SceneManager.LoadScene("Home");
     }
 

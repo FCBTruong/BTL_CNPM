@@ -9,7 +9,8 @@ public class HomeGame : MonoBehaviour
     public static HomeGame Instance;
     private void Start()
     {
-        Instance = this;
+        if (Instance != null) Destroy(this);
+        else Instance = this;
         gameKind = 0;
         DontDestroyOnLoad(this);
     }
