@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public Text titleText;
     public Text congratulation;
 
+    public GameObject startButton;
     private void Start()
     {
         numberBallMiss = listBalls.Count;
@@ -71,10 +72,10 @@ public class GameManager : MonoBehaviour
 
     public void ChangLanguage()
     {
-        int lang = 0;
-        lang = PlayerPrefs.GetInt("Language");
-
-        if (lang == 0)
+        int language = 0;
+        if (DataManager.Instance != null)
+            language = DataManager.Instance.language;
+        if (language == 0)
         {
             ChangeLanguageToVietnamese();
         }
@@ -90,6 +91,7 @@ public class GameManager : MonoBehaviour
         titleText.text = "Fill in the blanks on the number line";
         congratulation.text = "Well done! You completed the card";
         PlayerPrefs.SetInt("Language", 0);
+        if(DataManager.Instance != null) DataManager.Instance.language = 0;
     }
 
     public void ChangeLanguageToVietnamese()
@@ -98,5 +100,11 @@ public class GameManager : MonoBehaviour
         titleText.text = "Điền vào các ô trống số phù hợp";
         congratulation.text = "Làm tốt lắm! Bạn đã hoàn thành bài tập";
         PlayerPrefs.SetInt("Language", 1);
+        if (DataManager.Instance != null) DataManager.Instance.language = 1;
+    }
+
+    public void StartGame()
+    {
+        startButton.SetActive(false);
     }
 }
