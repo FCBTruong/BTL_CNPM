@@ -62,6 +62,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\OSK\Assets\Scripts\KeyboardDragHandler.cs" />
+    <Compile Include="Assets\OSK\Assets\Scripts\KeyboardScript.cs" />
+    <Compile Include="Assets\Scripts\AudioController.cs" />
     <Compile Include="Assets\Scripts\Ball.cs" />
     <Compile Include="Assets\Scripts\DataManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />

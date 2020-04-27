@@ -45,6 +45,10 @@ public class GameManager : MonoBehaviour
         if (numberBallMiss == 0)
         {
             gameOverStatus = true;
+            if (AudioController.Instance != null)
+            {
+                AudioController.Instance.PlayWinSound();
+            }
             Invoke("ShowWinGame", 2.0f);
         }
         else
@@ -68,6 +72,11 @@ public class GameManager : MonoBehaviour
         if (numberBallMiss == 5) return;
         listBalls[numberBallMiss].MoveLeft();
         numberBallMiss++;
+
+        if (AudioController.Instance != null)
+        {
+            AudioController.Instance.PlayLoseSound();
+        }
     }
 
     public void ChangLanguage()

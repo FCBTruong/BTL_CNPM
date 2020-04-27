@@ -134,46 +134,47 @@ public class ValueBox : MonoBehaviour
 
         choosingStatus();
 
-        if (Input.GetKeyDown(KeyCode.Alpha0))
+        if (Input.GetKeyDown(KeyCode.Alpha0) || KeyboardScript.numberInput == 0)
         {
             return CheckInputNumber(0);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        else if (Input.GetKeyDown(KeyCode.Alpha1) || KeyboardScript.numberInput == 1)
         {
             return CheckInputNumber(1);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha2) || KeyboardScript.numberInput == 2)
         {
             return CheckInputNumber(2);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetKeyDown(KeyCode.Alpha3) || KeyboardScript.numberInput == 3)
         {
             return CheckInputNumber(3);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        else if (Input.GetKeyDown(KeyCode.Alpha4) || KeyboardScript.numberInput == 4)
         {
             return CheckInputNumber(4);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        else if (Input.GetKeyDown(KeyCode.Alpha5) || KeyboardScript.numberInput == 5)
         {
             return CheckInputNumber(5);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha6))
+        else if (Input.GetKeyDown(KeyCode.Alpha6) || KeyboardScript.numberInput == 6)
         {
             return CheckInputNumber(6);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha7))
+        else if (Input.GetKeyDown(KeyCode.Alpha7) || KeyboardScript.numberInput == 7)
         {
             return CheckInputNumber(7);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha8))
+        else if (Input.GetKeyDown(KeyCode.Alpha8) || KeyboardScript.numberInput == 8)
         {
             return CheckInputNumber(8);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha9))
+        else if (Input.GetKeyDown(KeyCode.Alpha9) || KeyboardScript.numberInput == 9)
         {
             return CheckInputNumber(9);
         }
+
         return false;
     }
 
@@ -196,6 +197,7 @@ public class ValueBox : MonoBehaviour
     }
     public bool CheckInputNumber(int x)
     {
+        KeyboardScript.numberInput = -1;
         Debug.Log(listChar.Count);
         listChar[checkCharIndex].text = x.ToString("");
         if (x == firstChar)

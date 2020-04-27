@@ -29,7 +29,7 @@ public class HomeGame : MonoBehaviour
                 ChangeLanguageToVietnamese();
             }
             // English is default
-        }
+        }    
     }
 
     public void PressGame1()
